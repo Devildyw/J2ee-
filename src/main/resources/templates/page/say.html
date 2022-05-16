@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>狂神说-KuangStudy</title>
+    <title>CL Community</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/timeline.css}">
 </head>
@@ -41,11 +41,11 @@
                     <li th:each="say:${sayList}">
                         <div class="bullet green"></div>
                         <div class="desc">
-                            <h3>
+                            <h3 style="font-size: 16px">
                                 [[${say.getTitle()}]]
                                 <small class="float-right" th:text="${#dates.format(say.getGmtCreate(),'yyyy-MM-dd')}"></small>
                             </h3>
-                            <h4 th:utext="${say.getContent()}"></h4>
+                            <h4 th:utext="${say.getContent()}" style="font-size: 14px"></h4>
                         </div>
                     </li>
                 </ul>

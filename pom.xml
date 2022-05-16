@@ -8,10 +8,10 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.kuang</groupId>
-	<artifactId>kuangstudy</artifactId>
+	<groupId>org.cuit</groupId>
+	<artifactId>ChangLe_Community</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>kuangstudy</name>
+	<name>ChangLe_Community</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -47,6 +47,11 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.2.9</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>

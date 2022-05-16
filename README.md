@@ -1,12 +1,10 @@
-# 狂神的小社区开源版
-
-![image-20200731093732474](upload/image-20200731093732474.png)
+# 常乐村论坛(ChangLe村论坛)
 
 ### 介绍
 
 > 社区开源版本，精简了代码，改变为单体项目，方便大家一键启动！
 
-> 地址：http://www.kuangstudy.com/ 
+> 地址：[主页](124.222.35.20:9900/index)
 
 项目架子主要依赖：
 - SpringBoot 2.3.0
@@ -50,7 +48,4 @@ src/resources
 kuangshen.sql   数据库文件
 ```
 
-### 如何加入狂神的小社区
-
-http://mp.weixin.qq.com/mp/homepage?__biz=Mzg2NTAzMTExNg==&hid=5&sn=5732bda552bcb476e55f678983edfb51&scene=18#wechat_redirect
 

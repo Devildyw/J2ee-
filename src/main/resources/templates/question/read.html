@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>问答-KuangStudy</title>
+    <title>问答-CL Community</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <style>
         .nav-underline .nav-link {
@@ -28,7 +28,7 @@
                 <p class="blog-post-meta">
                     <span th:text="${#dates.format(question.getGmtUpdate(),'yyyy-MM-dd')}"></span>
                     by
-                    <a href="#" th:text="${question.getAuthorName()}"></a>
+                    <a th:href="@{'/user/'+${question.getAuthorId()}}" th:text="${question.getAuthorName()}"></a>
                     <span>
                         <svg class="bi bi-eye-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>

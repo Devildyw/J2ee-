@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>问答-KuangStudy</title>
+    <title>问答-CL Community</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
 </head>
 <body style="background: #f2f2f2;">
@@ -17,8 +17,8 @@
             <div class="my-3 p-3 bg-white rounded shadow-sm">
 
                 <h6 class="border-bottom border-gray pb-2 mb-0">
-                    Q&A 累计：
-                    <span th:text="${pageParam.getTotal()}"></span>
+                    文章累计：
+                    <span th:text="${pageParam.getTotal()}" style="color: #007bff"></span>
                     <span class="float-right" th:if="${!#strings.isEmpty(thisCategoryName)}">
                         <a th:href="@{/blog}">全部</a>
                         /
@@ -28,12 +28,12 @@
 
                 <div th:each="blog:${blogList}" class="media text-muted pt-3">
                     <!-- 头像 -->
-                    <img th:src="${blog.getAuthorAvatar()}" style="border-radius: 5px " width="32" height="32">
+                    <img th:src="${blog.getAuthorAvatar()}" style="border-radius: 5px " width="40" height="40">
                     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="margin-left: 5px">
                         <!-- 标题 -->
                         <a th:text="${blog.getTitle()}"
                            th:href="@{'/blog/read/'+${blog.getBid()}}"
-                           class="text-dark font-weight-bold text-decoration-none d-block">
+                           class="text-dark font-weight-bold text-decoration-none d-block" style="font-size: 15px">
                         </a>
                         <!-- 浏览量 -->
                         <span>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="p-4 my-3 bg-white rounded">
-                <p class="mb-0"> 社区公约: <br> 禁止瞎水博客，内容尽量有实际意义，禁止任何形式的广告，违者暂停账号使用! 申请分类可以在Q群@小狂神 </p>
+                <p class="mb-0"> 社区公约: <br> 禁止瞎水博客，内容尽量有实际意义，禁止任何形式的广告，违者暂停账号使用! 申请分类可以联系管理员QQ:1842501760 </p>
             </div>
 
             <div class="p-4 my-3 bg-white rounded">
@@ -96,8 +96,8 @@
             <div class="p-4 my-3 bg-white rounded">
                 <h4 class="font-italic">友情链接</h4>
                 <ol class="list-unstyled">
-                    <li><a href="https://gitee.com/kuangstudy">Gitee</a></li>
-                    <li><a href="https://space.bilibili.com/95256449">Bilibili</a></li>
+<!--                    <li><a href="https://gitee.com/kuangstudy">Gitee</a></li>-->
+<!--                    <li><a href="https://space.bilibili.com/95256449">Bilibili</a></li>-->
                 </ol>
             </div>
         </aside>
