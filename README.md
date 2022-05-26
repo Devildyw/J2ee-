@@ -38,14 +38,14 @@ src/main/java/com/kuang
 - service       service
 - utils         工具类
 - vo            vo对象
-KuangstudyApplication   启动类
+CLCommunityApplication   启动类
 
 src/resources
 - static        静态资源
 - templates     页面模板
 - application-dev.properties   配置文件
 
-kuangshen.sql   数据库文件
+ChangLe_Commnuity.sql   数据库文件
 ```
 
 

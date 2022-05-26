@@ -23,7 +23,7 @@ public class Swagger2Config {
 	@Bean
 	public Docket webApiConfig(){
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("KuangStudy-Api")
+				.groupName("ChangLe_Community-Api")
 				.apiInfo(webApiInfo())
 				.enable(enable) // 是否显示
 				.select()
@@ -33,10 +33,10 @@ public class Swagger2Config {
 
 	private ApiInfo webApiInfo(){
 		return new ApiInfoBuilder()
-				.title("KuangStudy-Api")
-				.description("KuangStudy-Api")
+				.title("ChangLe_Community-Api")
+				.description("ChangLe_Community-Api")
 				.version("1.0")
-				.contact(new Contact("KuangShen", "http://kuangstudy.com", "24736743@qq.com"))
+				.contact(new Contact("ChangLe_Community", "http://lovezoe.top:9900", "1842501760@qq.com"))
 				.build();
 	}
 
