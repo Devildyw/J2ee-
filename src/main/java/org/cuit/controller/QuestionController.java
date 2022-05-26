@@ -4,15 +4,15 @@ package org.cuit.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiOperation;
 import org.cuit.pojo.Comment;
 import org.cuit.pojo.Question;
 import org.cuit.pojo.QuestionCategory;
 import org.cuit.service.CommentService;
 import org.cuit.service.QuestionCategoryService;
 import org.cuit.service.QuestionService;
-import org.cuit.utils.KuangUtils;
+import org.cuit.utils.CLUtils;
 import org.cuit.vo.QuestionWriteForm;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +28,8 @@ import java.util.UUID;
 
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author 遇见狂神说
- * @since 2020-06-28
+ * @author Devil
+ * @since 2022-05-20
  */
 @Controller
 public class QuestionController {
@@ -100,7 +96,7 @@ public class QuestionController {
         // 构建问题对象
         Question question = new Question();
 
-        question.setQid(KuangUtils.getUuid());
+        question.setQid(CLUtils.getUuid());
         question.setTitle(questionWriteForm.getTitle());
         question.setContent(questionWriteForm.getContent());
         question.setStatus(0);
@@ -114,8 +110,8 @@ public class QuestionController {
         QuestionCategory category = questionCategoryService.getById(questionWriteForm.getCategoryId());
         question.setCategoryId(questionWriteForm.getCategoryId());
         question.setCategoryName(category.getCategory());
-        question.setGmtCreate(KuangUtils.getTime());
-        question.setGmtUpdate(KuangUtils.getTime());
+        question.setGmtCreate(CLUtils.getTime());
+        question.setGmtUpdate(CLUtils.getTime());
         // 存储对象
         questionService.save(question);
 
@@ -141,9 +137,9 @@ public class QuestionController {
     @PostMapping("/question/comment/{qid}")
     public String comment(@PathVariable("qid") String qid, Comment comment){
         // 存储评论
-        comment.setCommentId(KuangUtils.getUuid());
+        comment.setCommentId(CLUtils.getUuid());
         comment.setTopicCategory(2);
-        comment.setGmtCreate(KuangUtils.getTime());
+        comment.setGmtCreate(CLUtils.getTime());
         commentService.save(comment);
         // 状态改为已解决
         Question question = questionService.getOne(new QueryWrapper<Question>().eq("qid", qid));
@@ -160,7 +156,7 @@ public class QuestionController {
 
         Question question = questionService.getOne(new QueryWrapper<Question>().eq("qid", qid));
         if (!question.getAuthorId().equals(uid)){
-            KuangUtils.print("禁止非法编辑");
+            CLUtils.print("禁止非法编辑");
             return "redirect:/question";
         }
 
@@ -179,7 +175,7 @@ public class QuestionController {
         queryQuestion.setTitle(question.getTitle());
         queryQuestion.setCategoryId(question.getCategoryId());
         queryQuestion.setContent(question.getContent());
-        queryQuestion.setGmtUpdate(KuangUtils.getTime());
+        queryQuestion.setGmtUpdate(CLUtils.getTime());
 
         questionService.updateById(queryQuestion);
 
@@ -193,7 +189,7 @@ public class QuestionController {
 
         Question question = questionService.getOne(new QueryWrapper<Question>().eq("qid", qid));
         if (!question.getAuthorId().equals(uid)){
-            KuangUtils.print("禁止非法删除");
+            CLUtils.print("禁止非法删除");
             return "redirect:/question";
         }
         questionService.removeById(question);
@@ -223,7 +219,7 @@ public class QuestionController {
         }
 
         //上传文件地址
-        KuangUtils.print("上传文件保存地址："+realPath);
+        CLUtils.print("上传文件保存地址：" + realPath);
 
         //解决文件名字问题：我们使用uuid;
         String filename = "ks-"+ UUID.randomUUID().toString().replaceAll("-", "");
@@ -234,7 +230,7 @@ public class QuestionController {
         String suffix = originalFilename.substring(i + 1);
 
         String outFilename = filename + "."+suffix;
-        KuangUtils.print("文件名：" + outFilename);
+        CLUtils.print("文件名：" + outFilename);
 
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
         file.transferTo(new File(realPath +"/"+ outFilename));
@@ -244,7 +240,7 @@ public class QuestionController {
         res.put("url","/upload/"+month+"/"+ outFilename);
         res.put("success", 1);
         res.put("message", "upload success!");
-        KuangUtils.print(res.toJSONString());
+        CLUtils.print(res.toJSONString());
 
         return res;
     }

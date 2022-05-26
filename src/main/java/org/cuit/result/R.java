@@ -6,7 +6,10 @@ import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author Devil
+ * @since 2022-05-20
+ */
 @Data
 @ApiModel(value = "全局统一返回结果")
 public class R {

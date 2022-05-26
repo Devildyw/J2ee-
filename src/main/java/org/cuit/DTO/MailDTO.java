@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author Devil
- * @date 2022-05-25-21:25
+ * @since 2022-05-20
  */
 @Data
 public class MailDTO {

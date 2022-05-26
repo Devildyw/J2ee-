@@ -1,27 +1,23 @@
 package org.cuit.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
- * <p>
- * 
- * </p>
- *
- * @author 遇见狂神说
- * @since 2020-07-08
+ * @author Devil
+ * @since 2022-05-20
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("ks_download")
-@ApiModel(value="Download对象", description="")
+@TableName("cl_download")
+@ApiModel(value = "Download对象", description = "")
 public class Download implements Serializable {
 
     private static final long serialVersionUID = 1L;

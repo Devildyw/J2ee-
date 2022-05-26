@@ -1,15 +1,11 @@
 package org.cuit.service;
 
-import org.cuit.pojo.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.cuit.pojo.Comment;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
- * @author 遇见狂神说
- * @since 2020-06-30
+ * @author Devil
+ * @since 2022-05-20
  */
 public interface CommentService extends IService<Comment> {
 

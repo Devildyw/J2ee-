@@ -4,7 +4,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
+/**
+ * @author Devil
+ * @since 2022-05-20
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)

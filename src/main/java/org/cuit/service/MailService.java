@@ -4,7 +4,7 @@ import org.cuit.result.R;
 
 /**
  * @author Devil
- * @date 2022-05-25-21:17
+ * @since 2022-05-20
  */
 public interface MailService {
     /**

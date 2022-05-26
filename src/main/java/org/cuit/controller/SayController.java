@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.cuit.pojo.Say;
 import org.cuit.service.SayService;
-import org.cuit.utils.KuangUtils;
+import org.cuit.utils.CLUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+/**
+ * @author Devil
+ * @since 2022-05-20
+ */
 @Controller
 public class SayController {
 
@@ -33,14 +37,14 @@ public class SayController {
     }
 
     @PostMapping("/say/{role}")
-    public String saveSay(@PathVariable("role") int role, Say say){
+    public String saveSay(@PathVariable("role") int role, Say say) {
         // 防止请求提交
-        if (role!=1){
+        if (role != 1) {
             return "redirect:/say";
         }
 
-        say.setId(KuangUtils.getUuid());
-        say.setGmtCreate(KuangUtils.getTime());
+        say.setId(CLUtils.getUuid());
+        say.setGmtCreate(CLUtils.getTime());
         // 结果
         sayService.save(say);
         return "redirect:/say";
