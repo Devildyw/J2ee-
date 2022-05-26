@@ -3,6 +3,6 @@
 <mapper namespace="org.cuit.mapper.UserMapper">
 
     <select id="selectByEmail" resultType="org.cuit.pojo.User">
-
+        select * from cl_user where uid = (select uid from cl_user_info where email = #{email})
     </select>
 </mapper>

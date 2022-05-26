@@ -1,6 +1,7 @@
 package org.cuit.DTO;
 
 import lombok.Data;
+import org.cuit.pojo.User;
 
 /**
  * @author Devil
@@ -8,5 +9,9 @@ import lombok.Data;
  */
 @Data
 public class MailDTO {
+    private User user;
 
+    private String email;
+
+    private String code;
 }
