@@ -7,6 +7,10 @@ import lombok.experimental.Accessors;
 
 import java.util.List;
 
+/**
+ * @author Devil
+ * @since 2022-05-20
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)

@@ -9,22 +9,20 @@ import org.cuit.pojo.Comment;
 import org.cuit.service.BlogCategoryService;
 import org.cuit.service.BlogService;
 import org.cuit.service.CommentService;
-import org.cuit.utils.KuangUtils;
+import org.cuit.utils.CLUtils;
 import org.cuit.vo.QuestionWriteForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author 遇见狂神说
- * @since 2020-06-29
+ * @author Devil
+ * @since 2022-05-20
  */
 @Controller
 public class BlogController {
@@ -91,7 +89,7 @@ public class BlogController {
         // 构建问题对象
         Blog blog = new Blog();
 
-        blog.setBid(KuangUtils.getUuid());
+        blog.setBid(CLUtils.getUuid());
         blog.setTitle(questionWriteForm.getTitle());
         blog.setContent(questionWriteForm.getContent());
         blog.setSort(0);
@@ -104,8 +102,8 @@ public class BlogController {
         BlogCategory category = blogCategoryService.getById(questionWriteForm.getCategoryId());
         blog.setCategoryId(questionWriteForm.getCategoryId());
         blog.setCategoryName(category.getCategory());
-        blog.setGmtCreate(KuangUtils.getTime());
-        blog.setGmtUpdate(KuangUtils.getTime());
+        blog.setGmtCreate(CLUtils.getTime());
+        blog.setGmtUpdate(CLUtils.getTime());
         // 存储对象
         blogService.save(blog);
 
@@ -135,7 +133,7 @@ public class BlogController {
         Blog blog = blogService.getOne(new QueryWrapper<Blog>().eq("bid", bid));
 
         if (!blog.getAuthorId().equals(uid)){
-            KuangUtils.print("禁止非法编辑");
+            CLUtils.print("禁止非法编辑");
             return "redirect:/blog";
         }
 
@@ -154,7 +152,7 @@ public class BlogController {
         queryBlog.setTitle(blog.getTitle());
         queryBlog.setCategoryId(blog.getCategoryId());
         queryBlog.setContent(blog.getContent());
-        queryBlog.setGmtUpdate(KuangUtils.getTime());
+        queryBlog.setGmtUpdate(CLUtils.getTime());
 
         blogService.updateById(queryBlog);
 
@@ -169,7 +167,7 @@ public class BlogController {
         Blog blog = blogService.getOne(new QueryWrapper<Blog>().eq("bid", bid));
 
         if (!blog.getAuthorId().equals(uid)){
-            KuangUtils.print("禁止非法删除");
+            CLUtils.print("禁止非法删除");
             return "redirect:/blog";
         }
 
@@ -182,9 +180,9 @@ public class BlogController {
     @PostMapping("/blog/comment/{bid}")
     public String comment(@PathVariable("bid") String bid, Comment comment){
         // 存储评论
-        comment.setCommentId(KuangUtils.getUuid());
+        comment.setCommentId(CLUtils.getUuid());
         comment.setTopicCategory(1);
-        comment.setGmtCreate(KuangUtils.getTime());
+        comment.setGmtCreate(CLUtils.getTime());
         commentService.save(comment);
         // 重定向到列表页面
         return "redirect:/blog/read/"+bid;

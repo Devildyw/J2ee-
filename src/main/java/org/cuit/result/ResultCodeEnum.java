@@ -1,7 +1,10 @@
 package org.cuit.result;
 
 import lombok.Getter;
-
+/**
+ * @author Devil
+ * @since 2022-05-20
+ */
 @Getter
 public enum ResultCodeEnum {
 

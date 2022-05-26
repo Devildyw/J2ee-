@@ -7,7 +7,7 @@ import org.cuit.pojo.UserInfo;
 import org.cuit.service.InviteService;
 import org.cuit.service.UserInfoService;
 import org.cuit.service.UserService;
-import org.cuit.utils.KuangUtils;
+import org.cuit.utils.CLUtils;
 import org.cuit.vo.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * @author Devil
+ * @since 2022-05-20
+ */
 @Controller
 public class LoginController {
 
@@ -44,7 +48,7 @@ public class LoginController {
     // 注册业务
     @PostMapping("/register")
     public String register(RegisterForm registerForm, Model model){
-        KuangUtils.print("注册表单信息："+registerForm.toString());
+        CLUtils.print("注册表单信息：" + registerForm.toString());
         // 表单密码重复判断
         if (!registerForm.getPassword().equals(registerForm.getRepassword())){
             model.addAttribute("registerMsg","密码输入有误");
@@ -70,20 +74,20 @@ public class LoginController {
             }else {
                 // 构建用户对象
                 User user = new User();
-                user.setUid(KuangUtils.getUuid()); // 用户唯一id
+                user.setUid(CLUtils.getUuid()); // 用户唯一id
                 user.setRoleId(2);
                 user.setUsername(registerForm.getUsername());
                 // 密码加密
                 String bCryptPassword = new BCryptPasswordEncoder().encode(registerForm.getPassword());
                 user.setPassword(bCryptPassword);
-                user.setGmtCreate(KuangUtils.getTime());
-                user.setLoginDate(KuangUtils.getTime());
+                user.setGmtCreate(CLUtils.getTime());
+                user.setLoginDate(CLUtils.getTime());
                 // 保存对象！
                 userService.save(user);
-                KuangUtils.print("新用户注册成功："+user);
+                CLUtils.print("新用户注册成功：" + user);
 
                 // 激活邀请码
-                invite.setActiveTime(KuangUtils.getTime());
+                invite.setActiveTime(CLUtils.getTime());
                 invite.setStatus(1);
                 invite.setUid(user.getUid());
                 inviteService.updateById(invite);

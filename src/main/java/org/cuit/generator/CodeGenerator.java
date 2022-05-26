@@ -9,7 +9,10 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-
+/**
+ * @author Devil
+ * @since 2022-05-20
+ */
 public class CodeGenerator {
     public static void main(String[] args) {
 
