@@ -45,6 +45,11 @@ public class LoginController {
         return "register";
     }
 
+    @GetMapping("/forget")
+    public String forget(){
+        return "forget";
+    }
+
     // 注册业务
     @PostMapping("/register")
     public String register(RegisterForm registerForm, Model model){

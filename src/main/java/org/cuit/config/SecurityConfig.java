@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 访问权限
         http.authorizeRequests()
                 .antMatchers("/","/index").permitAll()
-                .antMatchers("/register","/login","/toLogin").permitAll()
+                .antMatchers("/register","/login","/toLogin","/forget").permitAll()
                 .antMatchers("/*").authenticated();
 
         // 登录配置
