@@ -8,6 +8,7 @@ import cn.hutool.core.util.StrUtil;
  */
 @SuppressWarnings("all")
 public class RegexUtils {
+
     /**
      * 是否是无效手机格式
      *
