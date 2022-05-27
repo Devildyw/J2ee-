@@ -1,13 +1,19 @@
 package org.cuit.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.commons.lang3.StringUtils;
+import org.cuit.DTO.ForgetDTO;
+import org.cuit.mapper.UserMapper;
 import org.cuit.pojo.Invite;
 import org.cuit.pojo.User;
 import org.cuit.pojo.UserInfo;
+import org.cuit.result.R;
 import org.cuit.service.InviteService;
+import org.cuit.service.RedisService;
 import org.cuit.service.UserInfoService;
 import org.cuit.service.UserService;
 import org.cuit.utils.CLUtils;
+import org.cuit.utils.regex.RegexUtils;
 import org.cuit.vo.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +21,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.annotation.Resource;
+import javax.sound.sampled.Line;
 
 /**
  * @author Devil
@@ -27,6 +37,10 @@ public class LoginController {
     InviteService inviteService;
     @Autowired
     UserService userService;
+    @Resource
+    RedisService redisService;
+    @Resource
+    UserMapper userMapper;
     @Autowired
     UserInfoService userInfoService;
 
@@ -46,7 +60,7 @@ public class LoginController {
     }
 
     @GetMapping("/forget")
-    public String forget(){
+    public String toForget(){
         return "forget";
     }
 
@@ -65,7 +79,11 @@ public class LoginController {
             model.addAttribute("registerMsg","用户名已存在");
             return "register";
         }
-
+        User haUser = userMapper.selectByEmail(registerForm.getEmail());
+        if (haUser!=null){
+            model.addAttribute("registerMsg","用户名已存在");
+            return "register";
+        }
         // 验证邀请码
         Invite invite = inviteService.getOne(new QueryWrapper<Invite>().eq("code", registerForm.getCode()));
         if (invite==null){
@@ -87,6 +105,7 @@ public class LoginController {
                 user.setPassword(bCryptPassword);
                 user.setGmtCreate(CLUtils.getTime());
                 user.setLoginDate(CLUtils.getTime());
+
                 // 保存对象！
                 userService.save(user);
                 CLUtils.print("新用户注册成功：" + user);
@@ -97,13 +116,17 @@ public class LoginController {
                 invite.setUid(user.getUid());
                 inviteService.updateById(invite);
 
+                UserInfo userInfo = new UserInfo();
+                userInfo.setEmail(registerForm.getEmail());
+                userInfo.setUid(user.getUid());
                 // todo: 用户信息
-                userInfoService.save(new UserInfo().setUid(user.getUid()));
+                userInfoService.save(userInfo);
 
                 // 注册成功，重定向到登录页面
                 return "redirect:/toLogin";
             }
         }
     }
+
 
 }
