@@ -2,22 +2,28 @@
 
 ### 介绍
 
-> 社区开源版本，精简了代码，改变为单体项目，方便大家一键启动！
 
 > 地址：[主页](124.222.35.20:9900/index)
 
 项目架子主要依赖：
+- 后端：
 - SpringBoot 2.3.0
 - MySQL 5.7
 - MyBatisPlus 3.0.5
 - swagger
 - fastjson
+- springsecurity
+- mybatis代码自动生成
+- rocketmq
+- spring-boot-starter-mail
+---
+- 前端：
 - thymeleaf
 - editormd
 - layer
+- axios
 - bootstrap
-- springsecurity
-- 代码自动生成
+
 
 ### 安装教程
 
@@ -34,10 +40,13 @@ src/main/java/com/kuang
 - generator     代码生成器
 - mapper        mapper
 - pojo          pojo
+- DTO           前端传入参数
 - result        统一返回结果
 - service       service
 - utils         工具类
 - vo            vo对象
+- producer      rocketmq消息生产者
+- consumer      rocketmq消息消费者
 CLCommunityApplication   启动类
 
 src/resources
@@ -46,6 +55,8 @@ src/resources
 - application-dev.properties   配置文件
 
 ChangLe_Commnuity.sql   数据库文件
+Dockerfile       Dockerfile docker部署文件
+pom.xml          maven版本依赖管理文件
 ```
 
 
