@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @since 2022-05-20
  */
 @RestController
-@RequestMapping("mall")
+@RequestMapping("mail")
 public class MailController {
     @Resource
     private MailService mailService;

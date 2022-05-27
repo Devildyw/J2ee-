@@ -20,8 +20,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 /**
- * @author Pymjl
- * @date 2022/1/19 13:05
+ * @author Devil
+ * @since 2022-05-20
  */
 
 @Configuration

@@ -32,7 +32,7 @@
                             <!--<span class="badge badge-primary">普通用户</span>-->
                             <span
                                     th:class="${user.getRoleId()==2?'badge badge-warning':'badge badge-success'}"
-                                    th:text="${user.getRoleId()==2?'Vip会员':'普通用户'}">
+                                    th:text="${user.getRoleId()==2?'普通用户':'管理员'}">
                             </span>
                         </small>
                         <p class="text-center">
@@ -42,9 +42,6 @@
                             <span th:each="hobby:${infoHobbys}"
                                   th:text="${hobby}"
                                   class="badge badge-light mr-1"></span>
-                        </p>
-                        <p>
-                            <button type="button" onclick="donate()" class="btn btn-outline-primary btn-sm btn-block">xxx</button>
                         </p>
                         <p>
                         <table class="table">

@@ -3,6 +3,9 @@ package org.cuit.utils;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+/**
+ * @author Devil
+ */
 public class CLUtils {
 
     static boolean printFlag = true;

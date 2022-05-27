@@ -3,35 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>注册-CL Community</title>
+    <title>忘记密码-CL Community</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/login.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body class="text-center">
 
-<form class="form-signin" th:action="@{/register}" method="post">
-    <img class="mb-4" th:src="@{/images/logo/logo7272.jpg}" alt="" width="72" height="72">
+<form class="form-signin">
+    <img class="mb-4" th:src="@{/images/logo/login.png}" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">忘记密码</h1>
 
     <!-- <p th:text="${registerMsg}" style="color: red"></p> -->
 
-    <input type="text" name="username" class="form-control mb-2" placeholder="用户名" required="">
-    <input type="text" class="form-control mb-2" placeholder="邮箱" required="">
+    <input type="text" id="username" name="username" class="form-control mb-2" placeholder="用户名" required="">
+    <input type="text" id="email" name="email" class="form-control mb-2" placeholder="邮箱" required="">
     <div class=".container">
         <div class="row">
             <div class="col-md-8">
-                <input type="text" class="form-control mb-2" placeholder="验证码" required="">
+                <input type="text" id="code" name="code" class="form-control mb-2" placeholder="验证码" required="">
             </div>
             <div class="col-md-4">
-                <button class="btn btn-sm btn-primary btn-block mb-2" type="submit">获取邮箱验证码</button>
+                <button id="getEmailCode" class="btn btn-sm btn-primary btn-block mb-2" type="button" onclick="sendMailCode()">获取邮箱验证码</button>
             </div>
         </div>
     </div>
-    <input type="password" name="password" class="form-control" placeholder="新密码" required="">
-    <input type="password" name="repassword" class="form-control" placeholder="确认密码" required="">
-    <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">忘记密码</button>
+    <input type="password" id="password" name="password" class="form-control" placeholder="新密码" required="">
+    <input type="password" id="repassword" name="repassword" class="form-control" placeholder="确认密码" required="">
+    <button class="btn btn-lg btn-primary btn-block mt-3" type="button" onclick="forgetPassword()">修改密码</button>
     <p class="mt-5 mb-3 text-muted">© CL Community</p>
 </form>
 
 </body>
+    <script>
+        function sendMailCode(){
+            var username = document.getElementById("username").value;
+            var value = document.getElementById("email").value
+            console.log(value)
+            var getEmailCode = document.getElementById("getEmailCode");
+            axios({
+                method:"GET",
+                url:"/mail/verify",
+                params:{
+                    username:username,
+                    email:value
+                }
+            }).then(response=>{
+                if (response.data['success']===true){
+                    getEmailCode.style.background="rgb(152, 174, 192)"
+                    getEmailCode.style.color="rgb(255,255,255)";
+                    var time =  60;
+                    while(time--){
+                        setTimeout(1000);
+                        getEmailCode.innerHTML="发送成功"+time+"秒后重试";
+                    }
+                }else{
+                    getEmailCode.style.background="rgb(152, 174, 192)"
+                    getEmailCode.style.color="rgb(255,255,255)";
+                    getEmailCode.innerHTML="邮件格式不对";
+                }
+            })
+        }
+        function forgetPassword(){
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value
+            var code = document.getElementById("code").value
+            var password = document.getElementById("password").value
+            var repassword = document.getElementById("repassword").value
+            axios({
+                method:"POST",
+                url:"/forget",
+                data:{
+                    "username":username,
+                    "email":email,
+                    "code":code,
+                    "password":password,
+                    "repassword":repassword
+                }
+
+            }).then(response=>{
+                if (response.data['success']===true){
+                    window.alert(response.data['message']);
+                    location.replace("./login.html");
+                }
+                else{
+                    window.alert(response.data['message']);
+                }
+            })
+
+        }
+    </script>
 </html>
