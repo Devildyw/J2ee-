@@ -62,12 +62,14 @@ public class MailConsumer implements RocketMQListener<MailDTO> {
             mimeMessageHelper.setSubject("常乐村论坛邮箱验证码");
             mimeMessageHelper.setSentDate(new Date());
             Context context = new Context();
+            context.setVariable("username",user.getUsername());
             context.setVariable("verifyCode", Arrays.asList(code.split("")));
             context.setVariable("expireTime",EXPIRE_TIME/60);
             String mail = templateEngine.process("mailcode/emailCode.html", context);
             mimeMessageHelper.setText(mail,true);
             javaMailSender.send(mimeMessage);
             //将邮件验证码存入redis中
+            System.out.println(code);
             redisService.set(code.toLowerCase(),email,EXPIRE_TIME);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
