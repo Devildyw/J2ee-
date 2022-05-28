@@ -1,19 +1,15 @@
 package org.cuit.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.apache.commons.lang3.StringUtils;
-import org.cuit.DTO.ForgetDTO;
 import org.cuit.mapper.UserMapper;
 import org.cuit.pojo.Invite;
 import org.cuit.pojo.User;
 import org.cuit.pojo.UserInfo;
-import org.cuit.result.R;
 import org.cuit.service.InviteService;
 import org.cuit.service.RedisService;
 import org.cuit.service.UserInfoService;
 import org.cuit.service.UserService;
 import org.cuit.utils.CLUtils;
-import org.cuit.utils.regex.RegexUtils;
 import org.cuit.vo.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,10 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
-import javax.sound.sampled.Line;
 
 /**
  * @author Devil
@@ -50,23 +44,38 @@ public class LoginController {
     }
 
     @GetMapping("/toLogin")
-    public String toLogin(){
+    public String toLogin() {
         return "login";
     }
 
     @GetMapping("/register")
-    public String toRegister(){
+    public String toRegister() {
         return "register";
     }
 
+    @GetMapping("/manage")
+    public String toManage() {
+        return "manager/manage";
+    }
+
+    @GetMapping("/welcome")
+    public String toWelcome() {
+        return "manager/welcome";
+    }
+
+    @GetMapping("/invite")
+    public String toDemo01() {
+        return "manager/invite";
+    }
+
     @GetMapping("/forget")
-    public String toForget(){
+    public String toForget() {
         return "forget";
     }
 
     // 注册业务
     @PostMapping("/register")
-    public String register(RegisterForm registerForm, Model model){
+    public String register(RegisterForm registerForm, Model model) {
         CLUtils.print("注册表单信息：" + registerForm.toString());
         // 表单密码重复判断
         if (!registerForm.getPassword().equals(registerForm.getRepassword())){
