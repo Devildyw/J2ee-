@@ -14,26 +14,6 @@
 <main role="main">
 
     <div class="container">
-
-        <div th:if="${session.loginUser.getRoleId()==1}"
-             class="col-md-12 blog-main" style="margin-top: 20px">
-            <form th:action="@{'/say/'+${session.loginUser.getRoleId()}}" method="post">
-                <div class="col-md-12 mb-3">
-                    <label>标题</label>
-                    <input type="text" name="title" class="form-control" value="" required>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <label>内容</label>
-                    <div id="blog-content">
-                        <textarea required name="content" rows="3" class="form-control"> </textarea>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <button type="submit" class="btn btn-primary btn-sm btn-block">发布闲记</button>
-                </div>
-            </form>
-        </div>
-
         <!-- 主要内容部分 -->
         <div class="timeline-small">
             <div class="timeline-small-body">
