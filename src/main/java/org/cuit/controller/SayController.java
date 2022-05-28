@@ -51,7 +51,16 @@ public class SayController {
     }
 
 
+    @GetMapping("manage/say")
+    public String managerIndexBlog(Model model) {
+        Page<Say> pageParam = new Page<>(1, 50);
+        sayService.page(pageParam,new QueryWrapper<Say>().orderByDesc("gmt_create"));
+        // 结果
+        List<Say> sayList = pageParam.getRecords();
+        model.addAttribute("sayList",sayList);
+        model.addAttribute("pageParam",pageParam);
 
-
+        return "manager/announcement";
+    }
 }
 
