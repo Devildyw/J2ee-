@@ -17,7 +17,7 @@
     <!-- <p th:text="${registerMsg}" style="color: red"></p> -->
 
     <input type="text" id="username" name="username" class="form-control mb-2" placeholder="用户名" required="">
-    <input type="text" id="email" name="email" class="form-control mb-2" placeholder="邮箱" required="">
+    <input type="text" id="email" name="email" class="form-control mb-2" placeholder="邮箱" required="" oninput="changeEmail()">
     <div class=".container">
         <div class="row">
             <div class="col-md-8">
@@ -36,6 +36,10 @@
 
 </body>
     <script>
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+
         function sendMailCode(){
             var username = document.getElementById("username").value;
             var value = document.getElementById("email").value
@@ -50,16 +54,14 @@
                 }
             }).then(response=>{
                 if (response.data['success']===true){
-                    getEmailCode.style.background="rgb(152, 174, 192)"
-                    getEmailCode.style.color="rgb(255,255,255)";
-                    var time =  60;
-                    while(time--){
-                        setTimeout(1000);
-                        getEmailCode.innerHTML="发送成功"+time+"秒后重试";
-                    }
+                    // getEmailCode.style.background="rgb(152, 174, 192)"
+                    // getEmailCode.style.color="rgb(255,255,255)";
+                    curCount = count;
+                    // 设置button效果，开始计时
+                    document.getElementById("getEmailCode").setAttribute("disabled","true" );//设置按钮为禁用状态
+                    document.getElementById("getEmailCode").innerHTML=curCount + "秒后重获";//更改按钮文字
+                    InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器timer处理函数，1秒执行一次
                 }else{
-                    getEmailCode.style.background="rgb(152, 174, 192)"
-                    getEmailCode.style.color="rgb(255,255,255)";
                     getEmailCode.innerHTML="邮件格式不对";
                 }
             })
@@ -91,6 +93,21 @@
                 }
             })
 
+        }
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {//超时重新获取验证码
+                window.clearInterval(InterValObj);// 停止计时器
+                document.getElementById("getEmailCode").removeAttribute("disabled");//移除禁用状态改为可用
+                document.getElementById("getEmailCode").value = "重获验证码";
+            } else {
+                curCount--;
+                document.getElementById("getEmailCode").innerHTML = curCount + "秒后重获";
+            }
+        }
+
+        function changeEmail(){
+            document.getElementById('getEmailCode').innerHTML='获取邮箱验证码'
         }
     </script>
 </html>
