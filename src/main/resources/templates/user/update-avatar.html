@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>头像修改-CL Community</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <style>
+        #avatar:hover{
+            background-color: red;
+        }
+    </style>
 </head>
 
 <body style="background: #f2f2f2;">
@@ -16,7 +21,26 @@
         <div th:replace="~{user/index::userShowPanel}"></div>
         <div class="col-md-9 blog-main">
             <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <p class="text-center">
+                    <img id="avatar" th:src="${user.getAvatar()}" style="border-radius: 50%" width="300" height="300" alt="tup">
+                </p>
 
+                <div>
+                    <select name="lanrentuku" onchange="document.images['idface'].src=options[selectedIndex].value;" style="margin: 0 auto">
+
+                        <option value="/images/donate/alipay.png">头像01</option>
+
+                        <option value="/images/donate/wechat.jpg">头像02</option>
+
+                        <option value="images/ico3.gif">头像03</option>
+
+                    </select>
+                    <div style="position:relative;">
+                        <img src="/images/donate/alipay.png"  id="idface" style="border-radius: 50%" width="150" height="150">
+                    </div>
+
+                </div>
+                <button class="btn btn-lg btn-primary btn-block mt-3" type="button">修改头像</button>
             </div>
         </div>
     </div>
@@ -36,16 +60,6 @@
 <script th:src="@{/js/axios.js}"></script>
 
 <script>
-    // 后台读取
-    function donate(){
-        axios.get('/user/donate/1').then(response => {
-            console.log();
-            layer.photos({
-                photos: response.data,
-                anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-            });
-        })
-    }
 </script>
 
 </body>

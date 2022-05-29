@@ -114,7 +114,7 @@ public class LoginController {
                 user.setPassword(bCryptPassword);
                 user.setGmtCreate(CLUtils.getTime());
                 user.setLoginDate(CLUtils.getTime());
-
+                user.setAvatar("/images/avatar/avatar-"+(int) (Math.random() * 10 + 1)+".jpg");
                 // 保存对象！
                 userService.save(user);
                 CLUtils.print("新用户注册成功：" + user);
@@ -137,5 +137,10 @@ public class LoginController {
         }
     }
 
+    public static void main(String[] args) {
+        for (int i = 0; i < 5000; i++) {
+            System.out.println();
+        }
+    }
 
 }

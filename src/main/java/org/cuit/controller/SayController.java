@@ -40,14 +40,14 @@ public class SayController {
     public String saveSay(@PathVariable("role") int role, Say say) {
         // 防止请求提交
         if (role != 1) {
-            return "redirect:/say";
+            return "redirect:/manage/say";
         }
 
         say.setId(CLUtils.getUuid());
         say.setGmtCreate(CLUtils.getTime());
         // 结果
         sayService.save(say);
-        return "redirect:/say";
+        return "redirect:/manage/say";
     }
 
 
