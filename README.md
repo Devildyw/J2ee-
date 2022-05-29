@@ -54,7 +54,7 @@ src/resources
 - templates     页面模板
 - application-dev.properties   配置文件
 
-ChangLe_Commnuity.sql   数据库文件
+cl_Commnuity.sql   数据库文件
 Dockerfile       Dockerfile docker部署文件
 pom.xml          maven版本依赖管理文件
 ```
