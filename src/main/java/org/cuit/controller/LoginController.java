@@ -10,6 +10,7 @@ import org.cuit.service.RedisService;
 import org.cuit.service.UserInfoService;
 import org.cuit.service.UserService;
 import org.cuit.utils.CLUtils;
+import org.cuit.utils.regex.RegexUtils;
 import org.cuit.vo.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -80,6 +81,10 @@ public class LoginController {
         // 表单密码重复判断
         if (!registerForm.getPassword().equals(registerForm.getRepassword())){
             model.addAttribute("registerMsg","密码输入有误");
+            return "register";
+        }
+        if (RegexUtils.isEmailInvalid(registerForm.getEmail())){
+            model.addAttribute("registerMsg","邮箱输入有误");
             return "register";
         }
         // 用户名已存在
