@@ -12,7 +12,7 @@
 - MyBatisPlus 3.0.5
 - swagger
 - fastjson
-- springsecurity
+- spring security
 - mybatis代码自动生成
 - rocketmq
 - spring-boot-starter-mail
